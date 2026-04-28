@@ -1,0 +1,905 @@
+<?php
+/
+
+<!DOCTYPE html>
+<html lang="rw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REB Exam Portal - With Photos & Tracking</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .logo-icon {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            color: #1e3c72;
+            font-size: 2rem;
+        }
+
+        .header h1 span {
+            color: #e67e22;
+        }
+
+        /* Login Card */
+        .login-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 450px;
+            margin: 0 auto 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: fadeIn 0.6s ease;
+        }
+
+        .login-card h2 {
+            text-align: center;
+            color: #1e3c72;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: #e67e22;
+            outline: none;
+        }
+
+        .login-btn {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #e67e22;
+            transform: translateY(-2px);
+        }
+
+        .error {
+            background: #fee;
+            color: #e74c3c;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Dashboard */
+        .dashboard-header {
+            background: white;
+            border-radius: 20px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .user-badge {
+            background: #e67e22;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .logout-btn {
+            background: #e74c3c;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #c0392b;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #1e3c72;
+        }
+
+        .stat-label {
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* Search Card */
+        .search-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .search-card h3 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+        }
+
+        .search-input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .search-input-group input {
+            flex: 1;
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            font-size: 16px;
+        }
+
+        .search-btn {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .search-btn:hover {
+            background: #e67e22;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: #f0f4f8;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .tab-btn.active {
+            background: #1e3c72;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        /* Student List */
+        .student-list {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .student-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .student-card {
+            background: #f0f4f8;
+            padding: 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .student-card:hover {
+            border-color: #e67e22;
+            transform: translateY(-3px);
+        }
+
+        .student-card-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #1e3c72;
+        }
+
+        .student-card-info {
+            flex: 1;
+        }
+
+        .student-card-info strong {
+            color: #1e3c72;
+        }
+
+        /* Photo Upload */
+        .photo-upload {
+            background: #f0f4f8;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        .current-photo {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .current-photo img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #e67e22;
+        }
+
+        /* Logs Table */
+        .logs-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .logs-table th, .logs-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .logs-table th {
+            background: #1e3c72;
+            color: white;
+        }
+
+        .logs-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        /* Results */
+        .results-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .student-info {
+            display: flex;
+            gap: 25px;
+            background: #f0f4f8;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .student-photo img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #e67e22;
+        }
+
+        .grade-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+        }
+
+        .grade-table th, .grade-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .grade-table th {
+            background: #1e3c72;
+            color: white;
+        }
+
+        .grade-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .grade-A { color: #27ae60; font-weight: bold; }
+        .grade-B { color: #2980b9; font-weight: bold; }
+        .grade-C { color: #f39c12; font-weight: bold; }
+        .grade-D { color: #e67e22; font-weight: bold; }
+        .grade-F { color: #e74c3c; font-weight: bold; }
+
+        .summary-box {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .average-score {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .pass-badge {
+            background: #27ae60;
+            padding: 5px 20px;
+            border-radius: 25px;
+            display: inline-block;
+        }
+
+        .fail-badge {
+            background: #e74c3c;
+            padding: 5px 20px;
+            border-radius: 25px;
+            display: inline-block;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+        }
+<!...vhvhvb cvhvb cjgcvbn cmcgm bn 
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #e67e22;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            background: #fee;
+            color: #e74c3c;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .student-info {
+                flex-direction: column;
+                text-align: center;
+            }
+            .grade-table th, .grade-table td {
+                padding: 8px;
+                font-size: 12px;
+            }
+            .logs-table {
+                font-size: 10px;
+            }
+            .logs-table th, .logs-table td {
+                padding: 6px;
+            }
+            .student-card {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="logo-icon">🇷🇼📸</div>
+        <h1>REB <span>Exam Portal</span></h1>
+        <p>Rwanda Education Board - With Photos & Advanced Tracking</p>
+        <p style="font-size: 12px; margin-top: 5px;">✅ System tracks all logins, result views, and has student photos</p>
+    </div>
+
+    <?php if (!isset($_SESSION['user_id'])): ?>
+        <!-- LOGIN FORM -->
+        <div class="login-card">
+            <h2>🔐 Kwinjira / Login</h2>
+            <?php if (isset($error)): ?>
+                <div class="error">❌ <?php echo htmlspecialchars($error); ?></div>
+            <?php endif; ?>
+            <form method="POST">
+                <div class="form-group">
+                    <label>👤 Username (Nomero y'ikizamini / ID)</label>
+                    <input type="text" name="username" placeholder="Urugero: 2024A001 cyangwa admin" required>
+                </div>
+                <div class="form-group">
+                    <label>🔒 Ijambo ry'ibanga / Password</label>
+                    <input type="password" name="password" placeholder="••••••" required>
+                </div>
+                <div class="form-group">
+                    <label>👥 Uruhare / Role</label>
+                    <select name="role">
+                        <option value="student">🧑‍🎓 Umunyeshuri / Student</option>
+                        <option value="admin">👨‍💼 Umuyobozi / Admin</option>
+                    </select>
+                </div>
+                <button type="submit" name="login" class="login-btn">🚪 Kwinjira / Login</button>
+            </form>
+            <div style="margin-top: 20px; text-align: center; font-size: 13px; color: #666;">
+                <p>📌 Abanyeshuri: <strong>2024A001</strong> | Password: <strong>student123</strong></p>
+                <p>📌 Admin: <strong>admin</strong> | Password: <strong>admin123</strong></p>
+            </div>
+        </div>
+    <?php else: ?>
+        <!-- DASHBOARD -->
+        <div class="dashboard-header">
+            <div class="user-info">
+                <?php if ($_SESSION['user_role'] == 'student' && isset($_SESSION['student_photo']) && $_SESSION['student_photo']): ?>
+                    <img src="<?php echo htmlspecialchars($_SESSION['student_photo']); ?>" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                <?php endif; ?>
+                <span>👋 Muraho, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!</span>
+                <span class="user-badge"><?php echo $_SESSION['user_role'] == 'admin' ? '👨‍💼 Admin' : '🧑‍🎓 Umunyeshuri'; ?></span>
+                <?php if ($_SESSION['user_role'] == 'student'): ?>
+                    <span class="user-badge" style="background: #27ae60;">📚 <?php echo htmlspecialchars($_SESSION['student_number']); ?></span>
+                <?php endif; ?>
+            </div>
+            <a href="?logout=1" class="logout-btn">🚪 Sohoka / Logout</a>
+        </div>
+
+        <?php if ($_SESSION['user_role'] == 'admin'): ?>
+            <!-- ADMIN DASHBOARD WITH TRACKING AND PHOTOS -->
+            <div class="stats-grid" id="statsGrid">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalStudents">-</div>
+                    <div class="stat-label">👨‍🎓 Abanyeshuri bose</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="todayLogins">-</div>
+                    <div class="stat-label">🔐 Login uyu munsi</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="todayViews">-</div>
+                    <div class="stat-label">👁️ Rebye amanota uyu munsi</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="studentsViewed">-</div>
+                    <div class="stat-label">📊 Abanyeshuri barebye amanota</div>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('search')">🔍 Shakisha umunyeshuri</button>
+                <button class="tab-btn" onclick="switchTab('students')">📋 Abanyeshuri bose</button>
+                <button class="tab-btn" onclick="switchTab('logs')">📜 Tracking logs</button>
+            </div>
+
+            <div id="tab-search" class="tab-content active">
+                <div class="search-card">
+                    <h3>🔍 Shakisha umunyeshuri / Search Student</h3>
+                    <div class="search-input-group">
+                        <input type="text" id="searchInput" placeholder="Nomero y'ikizamini cyangwa izina... (2024A001, UMUHIRE, etc.)">
+                        <button class="search-btn" onclick="searchStudent()">🔍 Shakisha</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-students" class="tab-content">
+                <div class="student-list">
+                    <h3>📋 Abanyeshuri bose / All Students</h3>
+                    <div id="studentList" class="student-grid"></div>
+                </div>
+            </div>
+
+            <div id="tab-logs" class="tab-content">
+                <div class="student-list">
+                    <h3>📜 Ibyakozwe / Activity Logs</h3>
+                    <div style="overflow-x: auto;">
+                        <table class="logs-table" id="logsTable">
+                            <thead>
+                                <tr>
+                                    <th>Igihe</th>
+                                    <th>Umuntu</th>
+                                    <th>Ubwoko</th>
+                                    <th>Igikorwa</th>
+                                    <th>Ibisobanuro</th>
+                                    <th>IP adresse</th>
+                                </tr>
+                            </thead>
+                            <tbody id="logsBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo Upload Modal (Hidden) -->
+            <div id="photoModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:1000; justify-content:center; align-items:center;">
+                <div style="background:white; padding:30px; border-radius:20px; max-width:500px; width:90%;">
+                    <h3 style="color:#1e3c72; margin-bottom:20px;">📸 Upload Photo</h3>
+                    <div id="modalStudentInfo"></div>
+                    <form method="POST" enctype="multipart/form-data" id="photoUploadForm">
+                        <input type="hidden" name="student_id" id="modalStudentId">
+                        <div class="form-group">
+                            <label>Hitamo ifoto / Choose Photo</label>
+                            <input type="file" name="photo" accept="image/*" required>
+                        </div>
+                        <button type="submit" name="upload_photo" class="search-btn">📤 Upload</button>
+                        <button type="button" class="search-btn" style="background:#666; margin-top:10px;" onclick="closeModal()">Funga / Close</button>
+                    </form>
+                </div>
+            </div>
+
+        <?php else: ?>
+            <!-- STUDENT DASHBOARD -->
+            <div class="search-card">
+                <h3>📊 Amanota yawe / Your Results</h3>
+                <button class="search-btn" onclick="loadMyResults()">👁️ Reba amanota yanje / View My Results</button>
+            </div>
+        <?php endif; ?>
+
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Iragenzurwa... / Loading...</p>
+        </div>
+
+        <div id="resultsContainer"></div>
+
+    <?php endif; ?>
+
+    <div class="footer">
+        <p>© 2026 Rwanda Education Board | With Photos & Advanced Tracking System</p>
+        <p>✅ System tracks all logins, result views, and student photos</p>
+    </div>
+</div>
+
+<script>
+    // Tab switching
+    function switchTab(tabName) {
+        document.querySelectorAll('.tab-content').forEach(tab => {
+            tab.classList.remove('active');
+        });
+        document.getElementById(`tab-${tabName}`).classList.add('active');
+        
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        event.target.classList.add('active');
+        
+        if (tabName === 'students') {
+            loadAllStudents();
+        } else if (tabName === 'logs') {
+            loadAllLogs();
+        }
+    }
+    
+    // Load statistics
+    function loadStats() {
+        fetch('?getStats=1')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('totalStudents').innerText = data.stats.total_students;
+                    document.getElementById('todayLogins').innerText = data.stats.today_logins;
+                    document.getElementById('todayViews').innerText = data.stats.today_views;
+                    document.getElementById('studentsViewed').innerText = data.stats.students_viewed;
+                }
+            });
+    }
+    
+    // Load all students with photos
+    function loadAllStudents() {
+        fetch('?getStudents=1')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success && data.students) {
+                    const studentList = document.getElementById('studentList');
+                    studentList.innerHTML = data.students.map(s => `
+                        <div class="student-card" onclick="showPhotoUpload(${s.id}, '${escapeHtml(s.full_name)}', '${s.student_number}')">
+                            <img class="student-card-img" src="${s.photo_path || 'https://randomuser.me/api/portraits/lego/1.jpg'}" alt="Photo">
+                            <div class="student-card-info">
+                                <strong>${escapeHtml(s.full_name)}</strong><br>
+                                <small>📚 ${s.student_number}</small><br>
+                                <small>🏫 ${escapeHtml(s.school)}</small><br>
+                                <small>📖 ${s.exam_level}</small>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            });
+    }
+    
+    // Load tracking logs
+    function loadAllLogs() {
+        fetch('?getLogs=1')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success && data.logs) {
+                    const logsBody = document.getElementById('logsBody');
+                    logsBody.innerHTML = data.logs.map(log => `
+                        <tr>
+                            <td>${new Date(log.created_at).toLocaleString()}</td>
+                            <td>${escapeHtml(log.user_display_name || 'Unknown')}</td>
+                            <td>${log.user_type}</td>
+                            <td>${escapeHtml(log.action)}</td>
+                            <td>${escapeHtml(log.details || '-')}</td>
+                            <td>${log.ip_address}</td>
+                        </tr>
+                    `).join('');
+                }
+            });
+    }
+    
+    // Show photo upload modal for admin
+    function showPhotoUpload(studentId, studentName, studentNumber) {
+        document.getElementById('modalStudentId').value = studentId;
+        document.getElementById('modalStudentInfo').innerHTML = `
+            <p><strong>Izina:</strong> ${escapeHtml(studentName)}</p>
+            <p><strong>Nomero:</strong> ${studentNumber}</p>
+        `;
+        document.getElementById('photoModal').style.display = 'flex';
+    }
+    
+    function closeModal() {
+        document.getElementById('photoModal').style.display = 'none';
+    }
+    
+    // Student functions
+    function loadMyResults() {
+        const resultsContainer = document.getElementById('resultsContainer');
+        const loading = document.getElementById('loading');
+        
+        loading.style.display = 'block';
+        resultsContainer.innerHTML = '';
+        
+        fetch('?ajax=search')
+            .then(response => response.json())
+            .then(data => {
+                loading.style.display = 'none';
+                if (data.success) {
+                    displayResults(data);
+                } else {
+                    showError(data.message || 'Nta manota yabonetse!');
+                }
+            })
+            .catch(error => {
+                loading.style.display = 'none';
+                showError('Network error! Please refresh the page.');
+            });
+    }
+    
+    function searchStudent() {
+        const searchInput = document.getElementById('searchInput').value.trim();
+        if (searchInput === '') {
+            showError('Nyamuneka shyiramo nomero y\'ikizamini cyangwa izina.');
+            return;
+        }
+        
+        const resultsContainer = document.getElementById('resultsContainer');
+        const loading = document.getElementById('loading');
+        
+        loading.style.display = 'block';
+        resultsContainer.innerHTML = '';
+        
+        fetch(`?ajax=search&search=${encodeURIComponent(searchInput)}`)
+            .then(response => response.json())
+            .then(data => {
+                loading.style.display = 'none';
+                if (data.success) {
+                    displayResults(data);
+                } else {
+                    showError(data.message || 'Nta munyeshuri wabonetse!');
+                }
+            })
+            .catch(error => {
+                loading.style.display = 'none';
+                showError('Network error! Please try again.');
+            });
+    }
+    
+    function displayResults(data) {
+        const resultsContainer = document.getElementById('resultsContainer');
+        const student = data.student;
+        
+        let gradesHtml = '';
+        for (let result of data.results) {
+            let gradeClass = '';
+            if (result.grade === 'A') gradeClass = 'grade-A';
+            else if (result.grade === 'B') gradeClass = 'grade-B';
+            else if (result.grade === 'C') gradeClass = 'grade-C';
+            else if (result.grade === 'D') gradeClass = 'grade-D';
+            else gradeClass = 'grade-F';
+            
+            gradesHtml += `<tr><td>${escapeHtml(result.subject)}</td><td>${result.score}%</td><td class="${gradeClass}">${result.grade}</td></tr>`;
+        }
+        
+        const statusBadge = data.status === 'Pass' ? '<span class="pass-badge">✅ Pass / Utsinze</span>' : '<span class="fail-badge">❌ Fail / Natsinze</span>';
+        
+        const html = `
+            <div class="results-card">
+                <div class="student-info">
+                    <div class="student-photo"><img src="${student.photo_path}" alt="Photo" onerror="this.src='https://randomuser.me/api/portraits/lego/1.jpg'"></div>
+                    <div class="student-details">
+                        <h3>🧑‍🎓 ${escapeHtml(student.full_name)}</h3>
+                        <p><strong>🏫 Ishami / School:</strong> ${escapeHtml(student.school)}</p>
+                        <p><strong>📖 Icyiciro / Level:</strong> ${escapeHtml(student.exam_level)}</p>
+                        <p><strong>📅 Umwaka / Year:</strong> ${student.exam_year}</p>
+                        <p><strong>🆔 Nomero y'ikizamini:</strong> ${escapeHtml(student.student_number)}</p>
+                    </div>
+                </div>
+                <table class="grade-table">
+                    <thead><tr><th>📚 Isomo / Subject</th><th>📊 Amanota / Score</th><th>🏆 Icyiciro / Grade</th></tr></thead>
+                    <tbody>${gradesHtml}</tbody>
+                </table>
+                <div class="summary-box">
+                    <h3>📈 Igereranyo / Overall Average</h3>
+                    <div class="average-score">${data.average}%</div>
+                    <div>${statusBadge}</div>
+                    <div style="margin-top:15px;font-size:14px;">✨ A=80-100% | B=70-79% | C=60-69% | D=50-59% | F=0-49%</div>
+                </div>
+            </div>
+        `;
+        resultsContainer.innerHTML = html;
+    }
+    
+    function showError(message) {
+        const resultsContainer = document.getElementById('resultsContainer');
+        resultsContainer.innerHTML = `<div class="error-message"><strong>❌ ${escapeHtml(message)}</strong></div>`;
+    }
+    
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+    
+    <?php if (isset($_SESSION['user_id']) && $_SESSION['user_role'] == 'admin'): ?>
+    document.addEventListener('DOMContentLoaded', function() {
+        loadStats();
+        loadAllStudents();
+        loadAllLogs();
+        
+        // Auto-refresh stats every 30 seconds
+        setInterval(loadStats, 30000);
+    });
+    <?php elseif (isset($_SESSION['user_id']) && $_SESSION['user_role'] == 'student'): ?>
+    document.addEventListener('DOMContentLoaded', function() {
+        loadMyResults();
+    });
+    <?php endif; ?>
+    
+    <?php if (isset($upload_success)): ?>
+    alert('<?php echo $upload_success; ?>');
+    closeModal();
+    location.reload();
+    <?php elseif (isset($upload_error)): ?>
+    alert('<?php echo $upload_error; ?>');
+    <?php endif; ?>
+</script>
+</body>
+</html>

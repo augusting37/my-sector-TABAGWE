@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gicumbi Grill | Authentic Rwandan Dining</title>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+        /* --- CSS STYLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; color: #333; line-height: 1.6; }
+        
+        /* Navbar */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 8%; background: #fff; position: fixed;
+            width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .logo { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: #e67e22; font-weight: bold; }
+        nav ul { display: flex; list-style: none; gap: 25px; }
+        nav ul a { text-decoration: none; color: #333; font-weight: 500; transition: 0.3s; }
+        nav ul a:hover { color: #e67e22; }
+
+        /* Hero Section */
+        #home {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://unsplash.com');
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; color: #fff; padding: 0 20px;
+        }
+        #home h1 { font-family: 'Playfair Display', serif; font-size: 4rem; margin-bottom: 15px; }
+        .btn { 
+            padding: 15px 35px; background: #e67e22; color: #fff; 
+            text-decoration: none; border-radius: 5px; font-weight: bold; transition: 0.3s;
+        }
+        .btn:hover { background: #d35400; }
+
+        /* Sections General */
+        section { padding: 100px 10%; text-align: center; }
+        h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 40px; position: relative; }
+        h2::after { content: ''; width: 60px; height: 3px; background: #e67e22; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); }
+
+        /* Menu Grid */
+        .menu-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 30px; }
+        .menu-item { background: #fdfdfd; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: left; }
+        .menu-item h3 { display: flex; justify-content: space-between; color: #e67e22; }
+        .price { color: #333; font-weight: bold; }
+
+        /* Contact Footer */
+        footer { background: #222; color: #fff; padding: 60px 10% 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+        footer h4 { color: #e67e22; margin-bottom: 20px; }
+        footer p { font-size: 0.9rem; opacity: 0.8; margin-bottom: 10px; }
+        .copyright { grid-column: 1 / -1; text-align: center; padding-top: 40px; border-top: 1px solid #444; margin-top: 20px; font-size: 0.8rem; }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            nav ul { display: none; }
+            #home h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">GICUMBI GRILL</div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">Our Story</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="tel:+250700000000" class="btn" style="padding: 8px 15px;">Call Now</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home">
+        <h1>Authentic Flavors</h1>
+        <p style="margin-bottom: 30px; font-size: 1.2rem;">The finest local ingredients served in the heart of Gicumbi.</p>
+        <a href="#menu" class="btn">Explore Menu</a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>Our Story</h2>
+        <p style="max-width: 800px; margin: 0 auto;">Founded in the rolling hills of Byumba, Gicumbi Grill brings together traditional Rwandan recipes and modern culinary techniques. We pride ourselves on sourcing every vegetable and grain from local farmers to ensure your plate is always fresh.</p>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" style="background: #f9f9f9;">
+        <h2>Chef's Favorites</h2>
+        <div class="menu-container">
+            <div class="menu-item">
+                <h3>Grilled Tilapia <span class="price">4,500 RWF</span></h3>
+                <p>Fresh from the lake, seasoned with local herbs and lemon.</p>
+            </div>
+            <div class="menu-item">
+                <h3>Goat Brochettes <span class="price">1,200 RWF</span></h3>
+                <p>Slow-grilled tender meat served with onion salad.</p>
+            </div>
+            <div class="menu-item">
+                <h3>Sombe & Matoke <span class="price">3,000 RWF</span></h3>
+                <p>Classic cassava leaves served with steamed green bananas.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Contact/Footer -->
+    <footer id="contact">
+        <div>
+            <h4>Visit Us</h4>
+            <p>Main Street, Byumba</p>
+            <p>Gicumbi, Rwanda</p>
+        </div>
+        <div>
+            <h4>Hours</h4>
+            <p>Monday - Sunday</p>
+            <p>08:00 AM - 10:00 PM</p>
+        </div>
+        <div>
+            <h4>Contact</h4>
+            <p>Phone: +250 780 000 000</p>
+            <p>Email: hello@gicumbigrill.com</p>
+        </div>
+        <div class="copyright">
+            &copy; 2024 Gicumbi Grill. All Rights Reserved.
+        </div>
+    </footer>
+    <video autoplay muted loop style="position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%; z-index: -1;">
+        <source src="https://www.videvo.net/videvo_files/converted/2016_08/preview/160809_01_Cooking_02.mp436864.webm" type="video/webm">
+        Your browser does not support the video tag. >
+
+</body>
+</html>

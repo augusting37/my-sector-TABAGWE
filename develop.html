@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>DevForge | Elevate Your Development Craft</title>
+  <!-- Google Fonts + Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8fafc;
+      color: #0f172a;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* glassmorphism navbar */
+    .navbar {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid #e2e8f0;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.02);
+    }
+
+    .nav-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 1.7rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #0f2b3d, #1e4a76);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .logo i {
+      background: none;
+      color: #2563eb;
+      margin-right: 8px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #1e293b;
+      transition: 0.2s;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: #2563eb;
+      border-bottom: 2px solid #2563eb;
+      padding-bottom: 4px;
+    }
+
+    /* buttons */
+    .btn-primary {
+      display: inline-block;
+      background: #2563eb;
+      color: white;
+      padding: 0.7rem 1.6rem;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.2s;
+      box-shadow: 0 4px 8px rgba(37, 99, 235, 0.2);
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #2563eb;
+      color: #2563eb;
+      box-shadow: none;
+    }
+
+    .btn-outline:hover {
+      background: #2563eb;
+      color: white;
+    }
+
+    /* hero */
+    .hero {
+      padding: 4rem 0 5rem;
+      background: linear-gradient(135deg, #f1f5f9 0%, #ffffff 100%);
+      border-bottom: 1px solid #e2edff;
+    }
+
+    .hero-grid {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    .hero-text {
+      flex: 1.2;
+    }
+
+    .hero-text h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1.2;
+      background: linear-gradient(to right, #0f172a, #2563eb);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-text p {
+      font-size: 1.1rem;
+      color: #334155;
+      margin-bottom: 2rem;
+      max-width: 90%;
+    }
+
+    .hero-img {
+      flex: 0.9;
+      background: #e6f0ff;
+      border-radius: 2rem;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    /* sections */
+    section {
+      padding: 5rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-header p {
+      color: #475569;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    /* cards grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.8rem;
+      box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.05);
+      transition: all 0.25s;
+      border: 1px solid #eef2ff;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: #cbdffa;
+      box-shadow: 0 20px 30px -12px rgba(37, 99, 235, 0.12);
+    }
+
+    .card-icon {
+      font-size: 2.5rem;
+      color: #2563eb;
+      margin-bottom: 1.2rem;
+    }
+
+    .card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #eef2ff;
+      color: #1e40af;
+      font-size: 0.75rem;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      margin-top: 1rem;
+    }
+
+    /* tools / resources */
+    .tools-list {
+      background: #ffffffdd;
+      border-radius: 1.8rem;
+      padding: 2rem;
+      border: 1px solid #e0e7ff;
+    }
+
+    .tool-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid #eef2ff;
+    }
+
+    .tool-item i {
+      font-size: 1.6rem;
+      width: 48px;
+      color: #2563eb;
+    }
+
+    /* roadmap */
+    .roadmap-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+
+    .roadmap-step {
+      background: white;
+      border-radius: 2rem;
+      padding: 1.5rem;
+      flex: 1;
+      min-width: 200px;
+      text-align: center;
+      border: 1px solid #e2e8f0;
+      transition: 0.2s;
+    }
+
+    .step-number {
+      background: #2563eb10;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 60px;
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: #2563eb;
+      margin: 0 auto 1rem;
+    }
+
+    /* challenge section */
+    .challenge-card {
+      background: linear-gradient(125deg, #0f172a, #1e293b);
+      color: white;
+      border-radius: 2rem;
+      padding: 2.5rem;
+      text-align: center;
+    }
+
+    .challenge-card .btn-primary {
+      background: #facc15;
+      color: #0f172a;
+      box-shadow: none;
+    }
+
+    /* footer */
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      padding: 2.5rem 0;
+      text-align: center;
+    }
+
+    .footer-links a {
+      color: #94a3b8;
+      margin: 0 1rem;
+      text-decoration: none;
+    }
+
+    @media (max-width: 780px) {
+      .hero-text h1 {
+        font-size: 2.2rem;
+      }
+      .nav-flex {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+      .section-header h2 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="container nav-flex">
+    <div class="logo">
+      <i class="fas fa-code"></i> DevForge<span style="font-weight:400">.hub</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#home" class="active-link">Home</a></li>
+      <li><a href="#paths">Learning Paths</a></li>
+      <li><a href="#tools">Dev Toolbox</a></li>
+      <li><a href="#challenge">Daily Challenge</a></li>
+      <li><a href="#community">Community</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <h1>Level up your <br> development craft</h1>
+        <p>Curated resources, real-world projects, and a growth-focused community — everything you need to become a confident developer.</p>
+        <div>
+          <a href="#paths" class="btn-primary">Start Learning <i class="fas fa-arrow-right"></i></a>
+          <a href="#tools" class="btn-primary btn-outline" style="margin-left: 1rem;">Tools <i class="fas fa-toolbox"></i></a>
+        </div>
+        <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+          <span><i class="fas fa-check-circle" style="color:#2563eb;"></i> 120+ interactive lessons</span>
+          <span><i class="fas fa-users"></i> 2.4k active devs</span>
+        </div>
+      </div>
+      <div class="hero-img">
+        <svg width="100%" height="240" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+          <rect width="400" height="240" fill="#eef2ff" rx="20" />
+          <path d="M70,160 L120,100 L170,140 L220,90 L270,130 L320,80 L350,110 L350,190 L70,190 Z" fill="#2563eb" opacity="0.15" />
+          <circle cx="130" cy="140" r="12" fill="#2563eb" />
+          <circle cx="250" cy="120" r="12" fill="#3b82f6" />
+          <rect x="80" y="180" width="240" height="25" fill="#cbd5e1" rx="6" />
+          <text x="150" y="198" font-size="12" fill="#1e293b" font-weight="bold"># build & deploy</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- Learning Paths Section -->
+  <section id="paths">
+    <div class="container">
+      <div class="section-header">
+        <h2>📚 Structured learning paths</h2>
+        <p>From beginner to advanced — follow proven roadmaps designed by industry experts</p>
+      </div>
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-icon"><i class="fab fa-html5"></i> <i class="fab fa-css3-alt"></i></div>
+          <h3>Frontend Foundation</h3>
+          <p>HTML5, CSS3, Flex/Grid, modern responsive design and accessibility best practices.</p>
+          <span class="badge">8 modules · 20h</span>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fab fa-js"></i></div>
+          <h3>JavaScript Mastery</h3>
+          <p>ES6+, async patterns, DOM manipulation, and real-world projects (todo, weather app).</p>
+          <span class="badge">12 modules · 32h</span>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fab fa-react"></i></div>
+          <h3>React + Ecosystem</h3>
+          <p>Hooks, context, state management, performance, and building full-stack apps with Vite.</p>
+          <span class="badge">10 modules · 28h</span>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-database"></i> <i class="fas fa-server"></i></div>
+          <h3>Backend & APIs</h3>
+          <p>Node.js, Express, RESTful design, MongoDB/PostgreSQL basics and authentication.</p>
+          <span class="badge">10 modules · 30h</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dev Toolbox (resources to improve) -->
+  <section id="tools" style="background: #f1f5f9;">
+    <div class="container">
+      <div class="section-header">
+        <h2>🛠️ Developer Toolbox</h2>
+        <p>Essential tools & resources that accelerate your daily development workflow</p>
+      </div>
+      <div class="tools-list">
+        <div class="tool-item"><i class="fab fa-github"></i> <div><strong>Git & GitHub flow</strong><br>Version control, open-source contributions, collaboration best practices</div></div>
+        <div class="tool-item"><i class="fas fa-terminal"></i> <div><strong>Terminal power user</strong><br>CLI shortcuts, bash/zsh, productivity boosters</div></div>
+        <div class="tool-item"><i class="fas fa-paintbrush"></i> <div><strong>UI/UIX fundamentals</strong><br>Figma basics, color theory, design systems for developers</div></div>
+        <div class="tool-item"><i class="fas fa-vial"></i> <div><strong>Testing & Debugging</strong><br>Jest, React Testing Library, Chrome DevTools mastery</div></div>
+        <div class="tool-item"><i class="fas fa-cloud-upload-alt"></i> <div><strong>Deployment & CI/CD</strong><br>Vercel, Netlify, GitHub Actions — ship with confidence</div></div>
+      </div>
+      <div style="margin-top: 2rem; text-align: center;">
+        <a href="#" class="btn-primary">Explore all resources →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Daily Challenge & Improvement -->
+  <section id="challenge">
+    <div class="container">
+      <div class="challenge-card">
+        <i class="fas fa-lightbulb" style="font-size: 2.8rem; color:#facc15;"></i>
+        <h2 style="margin: 1rem 0 0.5rem;">Daily coding challenge</h2>
+        <p style="margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto;">Build a responsive navbar with mobile menu using only HTML/CSS and a bit of JS — improve your problem-solving every day.</p>
+        <button id="newChallengeBtn" class="btn-primary" style="background:#facc15; color:#0f172a;">Generate new challenge 🚀</button>
+        <div id="challengeDisplay" style="margin-top: 1.8rem; background: #ffffff20; padding: 1rem; border-radius: 2rem; backdrop-filter: blur(4px);">
+          <span id="challengeText">✨ Challenge: Create a theme switcher (dark/light) using localStorage.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Community & progress section -->
+  <section id="community">
+    <div class="container">
+      <div class="section-header">
+        <h2>🌱 Grow together</h2>
+        <p>Join study groups, share your projects, and get feedback from real developers</p>
+      </div>
+      <div class="cards-grid">
+        <div class="card">
+          <i class="fas fa-comments" style="font-size: 2rem; color:#2563eb;"></i>
+          <h3>Dev discussions</h3>
+          <p>Weekly live coding sessions, pair programming, and code reviews.</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-chart-line" style="font-size: 2rem; color:#2563eb;"></i>
+          <h3>Progress tracker</h3>
+          <p>Log your skills, earn badges, and visualize your growth path.</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-laptop-code" style="font-size: 2rem; color:#2563eb;"></i>
+          <h3>Portfolio projects</h3>
+          <p>Build 5 real-world projects that stand out to recruiters.</p>
+        </div>
+      </div>
+
+      <!-- Roadmap for improvement -->
+      <div style="margin-top: 3rem;">
+        <div class="section-header">
+          <h2>🗺️ 6-Month Improvement roadmap</h2>
+          <p>Month by month plan to level up from junior to confident intermediate</p>
+        </div>
+        <div class="roadmap-grid">
+          <div class="roadmap-step"><div class="step-number">1</div><h4>Fundamentals</h4><small>HTML/CSS, Git, responsive design</small></div>
+          <div class="roadmap-step"><div class="step-number">2</div><h4>JavaScript deep dive</h4><small>ES6, APIs, async patterns</small></div>
+          <div class="roadmap-step"><div class="step-number">3</div><h4>Framework</h4><small>React / Vue basics + state</small></div>
+          <div class="roadmap-step"><div class="step-number">4</div><h4>Backend intro</h4><small>Node, Express, databases</small></div>
+          <div class="roadmap-step"><div class="step-number">5-6</div><h4>Full-stack project</h4><small>Build & deploy your portfolio</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA newsletter & final -->
+  <section style="background: #eef2ff; margin-top: 1rem;">
+    <div class="container" style="text-align: center; padding: 2rem 0;">
+      <h3>📬 Get weekly dev tips & challenges</h3>
+      <p style="margin-bottom: 1.5rem;">Subscribe to improve 1% every day — no spam, only actionable advice.</p>
+      <form id="newsletterForm" style="display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap;">
+        <input type="email" id="subEmail" placeholder="your.email@dev.com" style="padding: 0.8rem 1.2rem; border-radius: 60px; border: 1px solid #cbd5e1; min-width: 260px;">
+        <button type="submit" class="btn-primary">Subscribe <i class="fas fa-paper-plane"></i></button>
+      </form>
+      <p id="newsFeedback" style="margin-top: 0.8rem; font-size: 0.85rem;"></p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-links">
+      <a href="#">About</a> <a href="#">Roadmap</a> <a href="#">Mentorship</a> <a href="#">GitHub</a>
+    </div>
+    <p style="margin: 1.5rem 0 0.5rem;">&copy; 2026 DevForge — build skills, build future.</p>
+    <p style="font-size: 0.8rem;">Open source | Forever free for learners</p>
+  </div>
+</footer>
+
+<script>
+  // Daily challenge generator - improving development mindset
+  const challengeList = [
+    "Build a responsive card grid with CSS Grid that adapts from 1 to 3 columns.",
+    "Create a digital clock using setInterval and format it beautifully.",
+    "Implement a search filter that highlights matching text in a list (JavaScript).",
+    "Design a pure CSS tooltip that appears on hover with smooth transition.",
+    "Build a simple counter with increment, decrement, reset and localStorage persistence.",
+    "Fetch data from a public API (JSONPlaceholder) and display posts with loading state.",
+    "Make a custom modal popup from scratch using display/flex and event listeners.",
+    "Create a form validation that checks email, password strength in real time.",
+    "Implement a dark/light mode toggle with CSS variables and local storage.",
+    "Build a drag-and-drop list using native HTML5 drag & drop or JS events."
+  ];
+  const challengeTextSpan = document.getElementById('challengeText');
+  const newBtn = document.getElementById('newChallengeBtn');
+
+  function getRandomChallenge() {
+    const randomIndex = Math.floor(Math.random() * challengeList.length);
+    return challengeList[randomIndex];
+  }
+
+  if(newBtn) {
+    newBtn.addEventListener('click', () => {
+      const newChallenge = getRandomChallenge();
+      challengeTextSpan.innerHTML = `✨ Challenge: ${newChallenge}`;
+    });
+  }
+
+  // Newsletter form logic (simulate subscription & show feedback)
+  const newsletterForm = document.getElementById('newsletterForm');
+  const newsFeedback = document.getElementById('newsFeedback');
+  if(newsletterForm) {
+    newsletterForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const emailInput = document.getElementById('subEmail');
+      const email = emailInput.value.trim();
+      if(!email || !email.includes('@') || !email.includes('.')) {
+        newsFeedback.style.color = "#b91c1c";
+        newsFeedback.innerHTML = "⚠️ Please provide a valid email address.";
+        return;
+      }
+      newsFeedback.style.color = "#0f3b2c";
+      newsFeedback.innerHTML = "🎉 Thanks! You'll receive weekly dev insights. Check your inbox.";
+      emailInput.value = "";
+      setTimeout(() => {
+        newsFeedback.innerHTML = "";
+      }, 4000);
+    });
+  }
+
+  // highlight active nav on scroll (simple improvement)
+  const sections = document.querySelectorAll("section[id]");
+  const navLinks = document.querySelectorAll(".nav-links a");
+  function updateActiveNav() {
+    let current = "";
+    const scrollPos = window.scrollY + 150;
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if(scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+        current = section.getAttribute("id");
+      }
+    });
+    navLinks.forEach(link => {
+      link.classList.remove("active");
+      const href = link.getAttribute("href").substring(1);
+      if(href === current) {
+        link.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll", updateActiveNav);
+  window.addEventListener("load", updateActiveNav);
+
+  // smooth scroll for all anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if(targetId === "#" || targetId === "") return;
+      const targetEl = document.querySelector(targetId);
+      if(targetEl) {
+        e.preventDefault();
+        targetEl.scrollIntoView({ behavior: 'smooth' });
+        history.pushState(null, null, targetId);
+      }
+    });
+  });
+</script>
+</body>
+</html>

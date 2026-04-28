@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>My District | Community & Heritage</title>
+  <!-- Google Fonts & simple CSS reset -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 (free icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fefcf5;
+      color: #1e2a2f;
+      scroll-behavior: smooth;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* header & navigation */
+    .navbar {
+      background: #ffffffdd;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid #e9e2d0;
+    }
+
+    .nav-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #2b6e4e, #1e4a6e);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .logo i {
+      background: none;
+      color: #2b6e4e;
+      margin-right: 6px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #2c3e2f;
+      transition: 0.2s;
+      font-size: 1rem;
+    }
+
+    .nav-links a:hover {
+      color: #2b6e4e;
+      border-bottom: 2px solid #2b6e4e;
+      padding-bottom: 4px;
+    }
+
+    /* hero section */
+    .hero {
+      background: linear-gradient(120deg, #eef5e8 0%, #fdf8ed 100%);
+      padding: 4rem 0 5rem;
+      border-bottom: 1px solid #e2dccd;
+    }
+
+    .hero-grid {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    .hero-text {
+      flex: 1.2;
+    }
+
+    .hero-text h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      line-height: 1.2;
+      color: #1a3a2c;
+      margin-bottom: 1rem;
+    }
+
+    .hero-text p {
+      font-size: 1.2rem;
+      color: #2d4a3b;
+      margin-bottom: 2rem;
+      max-width: 90%;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #2b6e4e;
+      color: white;
+      padding: 0.8rem 1.8rem;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.2s;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #2b6e4e;
+      color: #2b6e4e;
+      margin-left: 1rem;
+    }
+
+    .btn-outline:hover {
+      background: #2b6e4e;
+      color: white;
+    }
+
+    .btn:hover {
+      background: #1e5a40;
+      transform: translateY(-2px);
+    }
+
+    .hero-img {
+      flex: 0.9;
+      background: #d9e0c5;
+      border-radius: 2rem;
+      overflow: hidden;
+      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* section styling */
+    section {
+      padding: 5rem 0;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60%;
+      height: 3px;
+      background: #c0a75e;
+      border-radius: 4px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.8rem;
+      box-shadow: 0 10px 25px -8px rgba(0, 0, 0, 0.05);
+      transition: all 0.25s ease;
+      border: 1px solid #efe6d4;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.12);
+      border-color: #d4c9b2;
+    }
+
+    .card i {
+      font-size: 2.5rem;
+      color: #2b6e4e;
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .stat-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2rem;
+      background: #f3f0e6;
+      border-radius: 2rem;
+      padding: 2.5rem;
+      margin-top: 2rem;
+    }
+
+    .stat-item {
+      text-align: center;
+      flex: 1;
+    }
+
+    .stat-number {
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: #2b6e4e;
+    }
+
+    /* directory / people */
+    .people-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    .person-card {
+      background: white;
+      border-radius: 2rem;
+      padding: 1.5rem;
+      text-align: center;
+      width: 220px;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.03);
+      border: 1px solid #e6dfcf;
+    }
+
+    .person-card i {
+      font-size: 3rem;
+      background: #eef3e9;
+      padding: 1rem;
+      border-radius: 60px;
+      color: #2c6e4e;
+    }
+
+    /* events */
+    .event-item {
+      display: flex;
+      gap: 1rem;
+      background: #faf7f0;
+      padding: 1.2rem;
+      border-radius: 1rem;
+      margin-bottom: 1rem;
+      border-left: 6px solid #c0a75e;
+    }
+
+    .event-date {
+      font-weight: 700;
+      min-width: 90px;
+      color: #2b6e4e;
+    }
+
+    /* contact form */
+    .contact-form {
+      background: #ffffffea;
+      padding: 2rem;
+      border-radius: 1.8rem;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e9e0ce;
+      max-width: 700px;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border: 1px solid #ddd2bc;
+      border-radius: 1rem;
+      font-family: inherit;
+      background: #fffdf9;
+    }
+
+    button {
+      background: #2b6e4e;
+      color: white;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 3rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #1f5a3f;
+    }
+
+    footer {
+      background: #1f2f28;
+      color: #e2e0d4;
+      padding: 2.5rem 0;
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .social-icons a {
+      color: #cfd8c5;
+      margin: 0 12px;
+      font-size: 1.4rem;
+      transition: 0.2s;
+    }
+
+    .social-icons a:hover {
+      color: #f5e2b6;
+    }
+
+    @media (max-width: 780px) {
+      .nav-flex {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .hero-text h1 {
+        font-size: 2.3rem;
+      }
+      .hero-text p {
+        max-width: 100%;
+      }
+      .btn-outline {
+        margin-left: 0;
+        margin-top: 1rem;
+        display: inline-block;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="container nav-flex">
+    <div class="logo">
+      <i class="fas fa-landmark"></i> District<span style="font-weight:300">360°</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#directory">Directory</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <!-- Hero / Home -->
+  <section id="home" class="hero">
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <h1>Welcome to <br> Greenfield District</h1>
+        <p>Where heritage meets innovation — a vibrant community nestled between rolling hills and thriving urban life. Discover the heart of our district, rich culture, and endless opportunities.</p>
+        <div>
+          <a href="#about" class="btn">Explore District <i class="fas fa-arrow-right"></i></a>
+          <a href="#contact" class="btn btn-outline">Get in touch</a>
+        </div>
+      </div>
+      <div class="hero-img">
+        <!-- SVG illustration / district landscape placeholder -->
+        <svg viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; background:#e1e9d4">
+          <rect width="500" height="320" fill="#E9F0DE" />
+          <path d="M0,220 L80,180 L160,210 L240,150 L320,190 L400,130 L500,170 L500,320 L0,320 Z" fill="#A7C5A3" opacity="0.8" />
+          <circle cx="380" cy="90" r="32" fill="#F4D58D" />
+          <rect x="280" y="200" width="50" height="70" fill="#C9B27C" />
+          <polygon points="280,200 305,170 330,200" fill="#8B5A2B" />
+          <rect x="100" y="210" width="45" height="60" fill="#B97F44" />
+          <polygon points="100,210 122,182 145,210" fill="#6B3E1A" />
+          <path d="M40,240 L110,240 L110,270 L40,270 Z" fill="#D4B483" />
+          <circle cx="420" cy="200" r="18" fill="#B3CFA0" />
+          <text x="200" y="295" font-family="Inter" font-size="14" fill="#3F5C3A">Greenfield Valley</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- About + Highlights -->
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">About the District</h2>
+      <p style="font-size:1.1rem; max-width: 800px; margin-bottom: 2rem;">Greenfield District was established in 1892 and has grown into a harmonious blend of rural charm and modern amenities. Known for our annual harvest festival, lush parks, and strong community bonds.</p>
+      <div class="cards-grid">
+        <div class="card">
+          <i class="fas fa-tree"></i>
+          <h3>Natural Beauty</h3>
+          <p>Over 12 parks, 30+ miles of trails, and the serene Willow Lake — a haven for nature lovers.</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-chalkboard-user"></i>
+          <h3>Education First</h3>
+          <p>Top-rated schools, a public library, and innovation hubs for lifelong learning.</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-hand-sparkles"></i>
+          <h3>Community Spirit</h3>
+          <p>Volunteer programs, farmers markets, and cultural festivals unite residents year-round.</p>
+        </div>
+      </div>
+
+      <!-- quick stats -->
+      <div class="stat-grid">
+        <div class="stat-item"><div class="stat-number">48k+</div><div>Residents</div></div>
+        <div class="stat-item"><div class="stat-number">15+</div><div>Local Businesses</div></div>
+        <div class="stat-item"><div class="stat-number">6</div><div>Schools & Colleges</div></div>
+        <div class="stat-item"><div class="stat-number">1856</div><div>Founded Year</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Directory / Officials & Services -->
+  <section id="directory" style="background: #faf7ef;">
+    <div class="container">
+      <h2 class="section-title">District Directory</h2>
+      <p style="margin-bottom: 2rem;">Connect with key services and elected representatives — we're here to serve you.</p>
+      <div class="people-list">
+        <div class="person-card">
+          <i class="fas fa-user-tie"></i>
+          <h4>Mayor J. Hernandez</h4>
+          <p>District Executive</p>
+          <small><i class="fas fa-envelope"></i> mayor@greenfield.gov</small>
+        </div>
+        <div class="person-card">
+          <i class="fas fa-school"></i>
+          <h4>Education Dept.</h4>
+          <p>Dr. L. Chen</p>
+          <small><i class="fas fa-phone-alt"></i> (555) 220-3100</small>
+        </div>
+        <div class="person-card">
+          <i class="fas fa-truck-fast"></i>
+          <h4>Public Works</h4>
+          <p>24/7 service line</p>
+          <small><i class="fas fa-clock"></i> Emergencies: 311</small>
+        </div>
+        <div class="person-card">
+          <i class="fas fa-leaf"></i>
+          <h4>Parks & Rec</h4>
+          <p>Community events</p>
+          <small>parks@greenfield.org</small>
+        </div>
+      </div>
+      <div style="margin-top: 2.5rem; background:#ffffffcc; border-radius: 1.5rem; padding: 1rem 2rem;">
+        <h3><i class="fas fa-building"></i> District Office Hours</h3>
+        <p>Mon–Fri: 8:30 AM – 4:30 PM | 123 Civic Plaza, Greenfield, GF 90210 | <i class="fas fa-phone"></i> (555) 101-2020</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Upcoming Events -->
+  <section id="events">
+    <div class="container">
+      <h2 class="section-title">Upcoming Events</h2>
+      <div style="margin: 2rem 0;">
+        <div class="event-item">
+          <div class="event-date"><i class="far fa-calendar-alt"></i> May 18, 2026</div>
+          <div><strong>🌸 Spring Bloom Festival</strong> — Main Street & District Park, live music & food trucks, 10am–6pm</div>
+        </div>
+        <div class="event-item">
+          <div class="event-date"><i class="far fa-calendar-alt"></i> June 5, 2026</div>
+          <div><strong>🏛️ Town Hall Meeting</strong> — Virtual & In-person at District Library, 6:30pm. Discuss new infrastructure plans.</div>
+        </div>
+        <div class="event-item">
+          <div class="event-date"><i class="far fa-calendar-alt"></i> June 20, 2026</div>
+          <div><strong>🌿 Greenfield Farmer's Market</strong> — Every Saturday, local produce, crafts, and workshops. 8am–1pm</div>
+        </div>
+        <div class="event-item">
+          <div class="event-date"><i class="far fa-calendar-alt"></i> July 4, 2026</div>
+          <div><strong>🎆 Independence Day Parade & Fireworks</strong> — Celebration at Riverfront Amphitheater</div>
+        </div>
+      </div>
+      <div class="card" style="background: #f1ede2;">
+        <i class="fas fa-bell"></i> <strong>Stay updated</strong> — subscribe to our district newsletter via the contact form.
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / feedback form + map mock -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">Contact District Hall</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
+        <div class="contact-form">
+          <h3><i class="fas fa-paper-plane"></i> Send us a message</h3>
+          <form id="districtContactForm">
+            <div class="form-group">
+              <input type="text" id="fullname" placeholder="Full name" required>
+            </div>
+            <div class="form-group">
+              <input type="email" id="emailAddr" placeholder="Email address" required>
+            </div>
+            <div class="form-group">
+              <textarea rows="4" id="message" placeholder="Your feedback, question, or service request..."></textarea>
+            </div>
+            <button type="submit" id="submitBtn">Submit <i class="fas fa-comment-dots"></i></button>
+            <p id="formFeedback" style="margin-top: 1rem; font-size: 0.9rem;"></p>
+          </form>
+        </div>
+        <div style="flex: 1; background: #eae4d4; border-radius: 1.8rem; padding: 1.5rem;">
+          <h3><i class="fas fa-map-marker-alt"></i> District hub</h3>
+          <p><strong>Address:</strong> 123 Main Street, District Center, Greenfield</p>
+          <p><strong>Emergency:</strong> 911 | Non-emergency police: (555) 770-2233</p>
+          <p><strong>Email:</strong> info@greenfielddistrict.gov</p>
+          <hr style="margin: 1rem 0; border-color: #cfc6b2;">
+          <i class="fas fa-clock"></i> <strong>After-hours service</strong>: Online portal available 24/7.
+          <div style="margin-top: 1rem; background: white; border-radius: 1rem; padding: 0.6rem; text-align: center; font-size: 0.85rem;">
+            <i class="fas fa-globe"></i> Social media: @GreenfieldDistrict
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-youtube"></i></a>
+    </div>
+    <p style="margin: 1.5rem 0 0.5rem;">&copy; 2026 Greenfield District Government — Building our future together.</p>
+    <p style="font-size: 0.85rem;">Accessibility | Privacy Policy | Employee Portal</p>
+  </div>
+</footer>
+
+<!-- Simple form handling + scroll behaviour -->
+<script>
+  (function() {
+    // Contact form handler with local alert & feedback
+    const form = document.getElementById('districtContactForm');
+    const feedbackPara = document.getElementById('formFeedback');
+
+    if(form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('fullname').value.trim();
+        const email = document.getElementById('emailAddr').value.trim();
+        const msg = document.getElementById('message').value.trim();
+
+        if(!name || !email) {
+          feedbackPara.style.color = "#b34e3a";
+          feedbackPara.innerHTML = "<i class='fas fa-exclamation-circle'></i> Please provide both name and email address.";
+          return;
+        }
+        if(!email.includes('@') || !email.includes('.')) {
+          feedbackPara.style.color = "#b34e3a";
+          feedbackPara.innerHTML = "<i class='fas fa-envelope'></i> Please enter a valid email address.";
+          return;
+        }
+
+        // simulate success submission
+        feedbackPara.style.color = "#2b6e4e";
+        feedbackPara.innerHTML = "<i class='fas fa-check-circle'></i> Thank you! Your message has been sent to District officials. We'll respond within 2 business days.";
+        form.reset();
+        // optional: hide success after 6 seconds but keep visible
+        setTimeout(() => {
+          if(feedbackPara.innerHTML.includes("Thank you")) {
+            feedbackPara.style.opacity = "0.7";
+          }
+        }, 5000);
+      });
+    }
+
+    // smooth scroll for all anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        if(targetId === "#" || targetId === "") return;
+        const targetElement = document.querySelector(targetId);
+        if(targetElement) {
+          e.preventDefault();
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+          // update url without jumping
+          history.pushState(null, null, targetId);
+        }
+      });
+    });
+
+    // quick little year auto update for footer (optional)
+    const yearSpan = document.querySelector('footer p');
+    if(yearSpan && yearSpan.innerText.includes('2026')) {
+      // just keep as is, dynamic if needed
+    }
+  })();
+</script>
+</body>
+</html><
